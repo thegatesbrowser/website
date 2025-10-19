@@ -1,6 +1,40 @@
+'use client'
+
+import { useEffect, useState } from "react"
 import { ArrowRight } from "lucide-react"
 
+type ActiveImage = {
+  src: string
+  alt: string
+}
+
 export default function Workflow() {
+  const [activeImage, setActiveImage] = useState<ActiveImage | null>(null)
+
+  useEffect(() => {
+    if (!activeImage) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActiveImage(null)
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [activeImage])
+
+  const previewImage = (image: ActiveImage) => {
+    setActiveImage(image)
+  }
+
+  const closePreview = () => {
+    setActiveImage(null)
+  }
+
   return (
     <section id="workflow" className="py-20 sm:py-32 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -22,6 +56,19 @@ export default function Workflow() {
                 alt="Godot Editor with TheGates Exporter"
                 className="w-full h-full object-cover"
               />
+              <button
+                type="button"
+                onClick={() =>
+                  previewImage({
+                    src: "/export-plugin/assets/workflow-step1.png",
+                    alt: "Godot Editor with TheGates Exporter",
+                  })
+                }
+                className="absolute inset-0 z-10 flex items-center justify-center cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                aria-label="Preview Godot Editor with TheGates Exporter"
+              >
+                <span className="sr-only">Open preview</span>
+              </button>
             </div>
             <div className="text-center">
               <h3 className="font-semibold text-foreground mb-2">Step 1: Publish from Godot</h3>
@@ -49,6 +96,19 @@ export default function Workflow() {
                 alt="TheGates Game World"
                 className="w-full h-full object-cover"
               />
+              <button
+                type="button"
+                onClick={() =>
+                  previewImage({
+                    src: "/export-plugin/assets/workflow-step2.png",
+                    alt: "TheGates Game World",
+                  })
+                }
+                className="absolute inset-0 z-10 flex items-center justify-center cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                aria-label="Preview TheGates Game World"
+              >
+                <span className="sr-only">Open preview</span>
+              </button>
             </div>
             <div className="text-center">
               <h3 className="font-semibold text-foreground mb-2">Step 2: Live on TheGates</h3>
@@ -57,6 +117,27 @@ export default function Workflow() {
           </div>
         </div>
       </div>
+
+      {activeImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image preview"
+          onClick={closePreview}
+        >
+          <div
+            className="relative w-full max-w-[min(90vw,1400px)]"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <img
+              src={activeImage.src}
+              alt={activeImage.alt}
+              className="w-full h-auto max-h-[95vh] rounded-xl border border-border bg-card"
+            />
+          </div>
+        </div>
+      )}
     </section>
   )
 }
