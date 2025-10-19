@@ -1,10 +1,12 @@
 import type { CSSProperties } from "react"
 
+type CSSCustomProperties = CSSProperties & Record<`--${string}`, string | number>
+
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
 export default function Hero() {
-  const badgeTheme: CSSProperties = {
+  const badgeTheme: CSSCustomProperties = {
     "--hero-badge-bg": "oklch(0.5499 0.2495 280.17 / 60%)",
   }
 
@@ -30,7 +32,7 @@ export default function Hero() {
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-foreground/70 leading-relaxed text-balance max-w-3xl mx-auto">
-              Instantly publish your Godot project. Test with users, gather feedback, and deploy
+              Instantly publish your Godot projects. Test with users, gather feedback, and deploy
               updates instantly across Linux, Windows, and macOS
             </p>
           </div>

@@ -24,8 +24,8 @@ export default function Workflow() {
               />
             </div>
             <div className="text-center">
-              <h3 className="font-semibold text-foreground mb-2">Step 1: Open Exporter</h3>
-              <p className="text-sm text-foreground/60">Access the TheGates Exporter panel in your Godot editor</p>
+              <h3 className="font-semibold text-foreground mb-2">Step 1: Publish from Godot</h3>
+              <p className="text-sm text-foreground/60">Open the TheGates Exporter in Godot and click Publish</p>
             </div>
           </div>
 
