@@ -9,12 +9,12 @@ const features = [
   {
     icon: Users,
     title: "Native Performance Testing",
-    description: "Test your game with real users on Linux, Windows, and macOS with native performance.",
+    description: "Test your project with users on Linux, Windows, and macOS with native performance.",
   },
   {
     icon: Rocket,
     title: "Instant Updates",
-    description: "Deploy bug fixes and new features instantly. All players get updates automatically.",
+    description: "Deploy bug fixes and new features instantly. All users get updates automatically.",
   },
 ]
 
@@ -22,12 +22,12 @@ export default function Features() {
   return (
     <section id="features" className="py-20 sm:py-32 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 space-y-4">
+        <div className="text-center mb-16 space-y-8">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground text-balance">
             What This Plugin Does
           </h2>
           <p className="text-lg text-foreground/60 max-w-2xl mx-auto text-balance">
-            Streamline your game development workflow
+            Streamline your Godot development workflow
           </p>
         </div>
 

@@ -1,7 +1,13 @@
+import type { CSSProperties } from "react"
+
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
 export default function Hero() {
+  const badgeTheme: CSSProperties = {
+    "--hero-badge-bg": "oklch(0.5499 0.2495 280.17 / 60%)",
+  }
+
   return (
     <section className="relative overflow-hidden bg-background py-20 sm:py-32 lg:py-40">
       <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -10,30 +16,49 @@ export default function Hero() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-8 text-center">
-          <div className="space-y-4">
+        <div className="space-y-12 text-center" style={badgeTheme}>
+          <div className="space-y-8">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-balance">
-              Export to TheGates in One Click
+              <span className="inline-block rounded-md px-3 py-0" style={{ backgroundColor: "var(--hero-badge-bg)" }}>
+                Launch
+              </span>{' '}
+              your Godot
+              <br />
+              project just in{' '}
+              <span className="inline-block rounded-md px-3 py-0" style={{ backgroundColor: "var(--hero-badge-bg)" }}>
+                One Click
+              </span>
             </h1>
             <p className="text-lg sm:text-xl text-foreground/70 leading-relaxed text-balance max-w-3xl mx-auto">
-              Instantly publish your Godot project to TheGates. Test with real users, gather feedback, and deploy
+              Instantly publish your Godot project. Test with users, gather feedback, and deploy
               updates instantly across Linux, Windows, and macOS.
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-              Download Plugin
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <Button size="lg" variant="outline" className="border-border hover:bg-muted bg-transparent">
-              View Documentation
-            </Button>
-          </div>
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="https://godotengine.org/asset-library/asset/2882" target="_blank" rel="noopener noreferrer">
+                <Button size="lg" className="bg-primary hover:bg-primary/80 text-primary-foreground">
+                  View in Godot Asset Library
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </a>
+              <a href="https://github.com/thegatesbrowser/thegates-export-plugin" target="_blank" rel="noopener noreferrer">
+                <Button size="lg" variant="outline" className="border-border hover:bg-muted bg-transparent">
+                  GitHub Repository
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </a>
+            </div>
 
-          <p className="text-sm text-foreground/60">
-            ✓ Free and open-source • ✓ One-click deployment • ✓ Real-time updates
-          </p>
+            <p className="text-sm text-foreground/60 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+              <span>✓ One-click deployment</span>
+              <span className="text-foreground/50">•</span>
+              <span>✓ Instant updates</span>
+              <span className="text-foreground/50">•</span>
+              <span>✓ Native performance</span>
+            </p>
+          </div>
         </div>
       </div>
     </section>

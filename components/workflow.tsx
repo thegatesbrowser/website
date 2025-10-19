@@ -4,7 +4,7 @@ export default function Workflow() {
   return (
     <section id="workflow" className="py-20 sm:py-32 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 space-y-4">
+        <div className="text-center mb-16 space-y-8">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground text-balance">
             From Editor to Live Game
           </h2>
