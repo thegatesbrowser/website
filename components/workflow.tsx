@@ -13,7 +13,7 @@ export default function Workflow() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
           {/* Step 1: Editor */}
           <div className="space-y-4">
             <div className="relative bg-card border border-border rounded-xl overflow-hidden flex items-center justify-center aspect-video">
