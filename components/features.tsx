@@ -1,49 +1,58 @@
-import { Zap, Users, Rocket } from "lucide-react"
+import { Zap, Cpu, Rocket, Users } from "lucide-react"
 
 const features = [
   {
     icon: Zap,
     title: "One-Click Publishing",
-    description: "Launch your Godot project to TheGates instantly. No complex setup or configuration needed.",
+    description: "Skip the complex deployment process. Publish directly from Godot with a single click",
   },
   {
-    icon: Users,
-    title: "Native Performance Testing",
-    description: "Test your project with users on Linux, Windows, and macOS with native performance.",
+    icon: Cpu,
+    title: "Native Performance",
+    description: "Test your game with real users on Linux, Windows, and macOS with native performance",
   },
   {
     icon: Rocket,
     title: "Instant Updates",
-    description: "Deploy bug fixes and new features instantly. All users get updates automatically.",
+    description: "Fix bugs and deploy updates instantly. All players get the latest version automatically",
+  },
+  {
+    icon: Users,
+    title: "Free Hosting",
+    description: "Host your project on TheGates servers for free and reach players faster",
   },
 ]
 
 export default function Features() {
   return (
     <section id="features" className="py-20 sm:py-32 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 space-y-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8 space-y-8">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-            What This Plugin Does
+            Why TheGates Export?
           </h2>
           <p className="text-lg text-foreground/60 max-w-2xl mx-auto text-balance">
             Streamline your Godot development workflow
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {features.map((feature, index) => {
             const Icon = feature.icon
             return (
               <div
                 key={index}
-                className="group p-8 rounded-xl border border-border bg-card hover:border-primary/50 hover:bg-card/50 transition-all duration-300"
+                className="group p-5 rounded-xl border border-border bg-card hover:border-primary/50 hover:bg-card/50 transition-all duration-300"
               >
-                <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                  <Icon className="w-6 h-6 text-primary" />
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                    <Icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground mb-2">{feature.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-3">{feature.title}</h3>
-                <p className="text-foreground/60 leading-relaxed">{feature.description}</p>
               </div>
             )
           })}

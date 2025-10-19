@@ -31,20 +31,20 @@ export default function Hero() {
             </h1>
             <p className="text-lg sm:text-xl text-foreground/70 leading-relaxed text-balance max-w-3xl mx-auto">
               Instantly publish your Godot project. Test with users, gather feedback, and deploy
-              updates instantly across Linux, Windows, and macOS.
+              updates instantly across Linux, Windows, and macOS
             </p>
           </div>
 
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://godotengine.org/asset-library/asset/2882" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="bg-primary hover:bg-primary/80 text-primary-foreground">
+                <Button size="lg" className="bg-primary hover:bg-primary/80 text-primary-foreground w-full sm:w-auto">
                   View in Godot Asset Library
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </a>
               <a href="https://github.com/thegatesbrowser/thegates-export-plugin" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="outline" className="border-border hover:bg-muted bg-transparent">
+                <Button size="lg" variant="outline" className="border-border hover:bg-muted bg-transparent w-full sm:w-auto">
                   GitHub Repository
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
