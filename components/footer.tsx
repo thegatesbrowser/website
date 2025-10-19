@@ -10,6 +10,7 @@ export default function Footer() {
               href="https://thegates.io/"
               className="transition-colors hover:text-foreground/65"
               rel="noopener noreferrer"
+              target="_blank"
             >
               TheGates Website
             </a>
@@ -18,6 +19,7 @@ export default function Footer() {
               href="https://docs.thegates.io"
               className="transition-colors hover:text-foreground/65"
               rel="noopener noreferrer"
+              target="_blank"
             >
               Documentation
             </a>
