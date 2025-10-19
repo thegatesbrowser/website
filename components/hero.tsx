@@ -20,18 +20,18 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-12 text-center" style={badgeTheme}>
           <div className="space-y-8">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-balance">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight sm:text-balance text-pretty">
               <span className="inline-block rounded-md px-3 py-0" style={{ backgroundColor: "var(--hero-badge-bg)" }}>
                 Launch
               </span>{' '}
-              your Godot
-              <br />
+              your Godot{' '}
+              <br className="hidden sm:block" />
               project just in{' '}
               <span className="inline-block rounded-md px-3 py-0" style={{ backgroundColor: "var(--hero-badge-bg)" }}>
                 One Click
               </span>
             </h1>
-            <p className="text-lg sm:text-xl text-foreground/70 leading-relaxed text-balance max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-foreground/70 leading-relaxed sm:text-balance text-pretty max-w-3xl mx-auto">
               Instantly publish your Godot projects. Share with players, gather feedback, and deploy
               updates instantly across Linux, Windows, and macOS
             </p>
