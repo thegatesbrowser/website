@@ -9,7 +9,7 @@ const features = [
   {
     icon: Cpu,
     title: "Native Performance",
-    description: "Test your game with real users on Linux, Windows, and macOS with native performance",
+    description: "Share your game with players on Linux, Windows, and macOS with native performance",
   },
   {
     icon: Rocket,

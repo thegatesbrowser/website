@@ -32,7 +32,7 @@ export default function Hero() {
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-foreground/70 leading-relaxed text-balance max-w-3xl mx-auto">
-              Instantly publish your Godot projects. Test with users, gather feedback, and deploy
+              Instantly publish your Godot projects. Share with players, gather feedback, and deploy
               updates instantly across Linux, Windows, and macOS
             </p>
           </div>

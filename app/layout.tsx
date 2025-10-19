@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "TheGates Export Plugin",
-  description: "Instantly publish your Godot project. Test with users, gather feedback, and deploy updates instantly across Linux, Windows, and macOS.",
+  description: "Instantly publish your Godot project. Share with players, gather feedback, and deploy updates instantly across Linux, Windows, and macOS.",
 };
 
 export default function RootLayout({
