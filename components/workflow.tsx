@@ -18,7 +18,7 @@ export default function Workflow() {
           <div className="space-y-4">
             <div className="relative bg-card border border-border rounded-xl overflow-hidden flex items-center justify-center aspect-video">
               <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-23QuHW6N3wvWxB4hIvMGMnlCistDwY.png"
+                src="/assets/workflow-step1.png"
                 alt="Godot Editor with TheGates Exporter"
                 className="w-full h-full object-cover"
               />
@@ -45,7 +45,7 @@ export default function Workflow() {
           <div className="space-y-4">
             <div className="relative bg-card border border-border rounded-xl overflow-hidden flex items-center justify-center aspect-video">
               <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Y30wpccKgNVUDFeUhCFgSwQhmjQQU1.png"
+                src="/assets/workflow-step2.png"
                 alt="TheGates Game World"
                 className="w-full h-full object-cover"
               />
