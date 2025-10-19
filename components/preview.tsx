@@ -12,7 +12,7 @@ export default function Preview() {
         <div className="flex justify-center">
           <div className="relative rounded-xl border border-border overflow-hidden bg-card max-w-md">
             <img
-              src="/assets/preview-plugin.png"
+              src="/export-plugin/assets/preview-plugin.png"
               alt="TheGates Exporter Plugin Interface"
               className="w-full h-auto"
             />
