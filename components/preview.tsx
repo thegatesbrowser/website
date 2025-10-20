@@ -18,7 +18,7 @@ export default function Preview() {
               alt="TheGates Exporter Plugin Interface"
               width={864}
               height={486}
-              className="w-full h-auto"
+              className="w-full h-full object-cover"
               unoptimized
               priority
             />
