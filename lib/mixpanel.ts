@@ -37,9 +37,17 @@ export function getMixpanelClient(): mixpanel.Mixpanel | null {
     return null;
   }
 
-  cachedClient = mixpanel.init(token, {
+  const region = (process.env.NEXT_PUBLIC_MIXPANEL_REGION || "US").toUpperCase();
+  const initConfig: { protocol?: string; host?: string; geolocate?: boolean } = {
     protocol: "https",
-  });
+    geolocate: true,
+  };
+
+  if (region === "EU") {
+    initConfig.host = "api-eu.mixpanel.com";
+  }
+
+  cachedClient = mixpanel.init(token, initConfig);
 
   return cachedClient;
 }

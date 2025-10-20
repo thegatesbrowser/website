@@ -1,8 +1,32 @@
 import { NextResponse } from "next/server"
 
-import { getMixpanelClient } from "@/lib/mixpanel"
-
 export async function POST(request: Request) {
+  const getClientIpFromRequest = (req: Request): string | undefined => {
+    const headers = req.headers
+    const xForwardedFor = headers.get("x-forwarded-for")
+    if (xForwardedFor) {
+      const forwardedIps = xForwardedFor
+        .split(",")
+        .map((ip) => ip.trim())
+        .filter((ip) => ip.length > 0)
+      if (forwardedIps.length > 0) return forwardedIps[0]
+    }
+
+    const xRealIp = headers.get("x-real-ip")
+    if (xRealIp) return xRealIp
+
+    const cfConnectingIp = headers.get("cf-connecting-ip")
+    if (cfConnectingIp) return cfConnectingIp
+
+    const trueClientIp = headers.get("true-client-ip")
+    if (trueClientIp) return trueClientIp
+
+    const xClientIp = headers.get("x-client-ip")
+    if (xClientIp) return xClientIp
+
+    return undefined
+  }
+
   const contentType = request.headers.get("content-type") ?? ""
 
   let events: Array<{ event: string; properties?: Record<string, unknown> }>
@@ -61,14 +85,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 })
   }
 
-  const mixpanel = getMixpanelClient()
-
-  if (!mixpanel) {
-    return NextResponse.json({ error: "Mixpanel unavailable" }, { status: 503 })
-  }
-
   const referer = request.headers.get("referer") ?? undefined
   const userAgent = request.headers.get("user-agent") ?? undefined
+  const clientIp = getClientIpFromRequest(request)
+
+  const region = (process.env.NEXT_PUBLIC_MIXPANEL_REGION || "US").toUpperCase()
+  const token = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN
+  if (!token) {
+    return NextResponse.json({ error: "Mixpanel token missing" }, { status: 500 })
+  }
+
+  const trackHost = region === "EU" ? "https://api-eu.mixpanel.com" : "https://api-js.mixpanel.com"
+  const trackUrlBase = `${trackHost}/track`
 
   for (const event of events) {
     const properties = { ...(event.properties ?? {}) } as Record<string, unknown>
@@ -77,11 +105,41 @@ export async function POST(request: Request) {
       delete (properties as Record<string, unknown>)["token"]
     }
 
-    mixpanel.track(event.event, {
-      ...properties,
-      referer,
-      userAgent,
+    // Add token and enrich with headers
+    const eventPayload = {
+      event: event.event,
+      properties: {
+        ...properties,
+        token,
+        referer,
+        userAgent,
+      },
+    }
+
+    if (clientIp && !('ip' in eventPayload.properties)) {
+      (eventPayload.properties as Record<string, unknown>)['ip'] = clientIp
+    }
+
+    // Build request to Mixpanel track endpoint with explicit IP override
+    const endpointUrl = `${trackUrlBase}?ip=0`
+
+    const bodyData = Buffer.from(JSON.stringify(eventPayload)).toString("base64")
+    const formBody = `data=${encodeURIComponent(bodyData)}`
+
+    const upstreamResponse = await fetch(endpointUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Accept: "*/*",
+      },
+      body: formBody,
+      // Mixpanel expects short-lived requests; no need for caching
     })
+
+    if (!upstreamResponse.ok) {
+      const text = await upstreamResponse.text().catch(() => "")
+      console.error("Mixpanel track forward failed", upstreamResponse.status, text)
+    }
   }
 
   return NextResponse.json({ ok: true })
