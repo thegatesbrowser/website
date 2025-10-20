@@ -19,17 +19,8 @@ const withBasePath = (path: string) => {
   return `${basePath}${cleanPath}` || cleanPath
 }
 
-const MIXPANEL_LIB_PATH = withBasePath("/api/mixpanel/lib")
-const MIXPANEL_SNIPPET_PATH = withBasePath("/api/mixpanel/snippet")
 const MIXPANEL_RECORDER_PATH = withBasePath("/api/mixpanel/recorder")
 const MIXPANEL_API_HOST = withBasePath("/api/mixpanel")
-
-declare global {
-  interface Window {
-    MIXPANEL_CUSTOM_LIB_URL?: string
-    __mp_recorder_src?: string
-  }
-}
 
 type MixpanelProviderProps = {
   children: React.ReactNode
@@ -46,48 +37,38 @@ export function MixpanelProvider({ children }: MixpanelProviderProps) {
     initializedRef.current = true
 
     window.__mixpanelReady = false
-    // Ensure stub exists before loading the snippet to avoid "__SV" undefined errors
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ;(window as any).mixpanel = (window as any).mixpanel || []
-    window.MIXPANEL_CUSTOM_LIB_URL = MIXPANEL_LIB_PATH
-    window.__mp_recorder_src = MIXPANEL_RECORDER_PATH
 
-    const mixpanelScript = document.createElement("script")
-    mixpanelScript.src = MIXPANEL_SNIPPET_PATH
-    mixpanelScript.async = true
-    mixpanelScript.onload = () => {
-      if (!window.mixpanel) {
-        console.error("Mixpanel snippet loaded but global object missing")
-        return
+    const token = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN
+    if (!token) {
+      console.error("NEXT_PUBLIC_MIXPANEL_TOKEN not found")
+      return
+    }
+
+    ;(async () => {
+      try {
+        const mod = await import("mixpanel-browser")
+        // Some bundlers expose default, others the module itself; handle both
+        const mp = (mod as unknown as { default?: unknown }).default ?? (mod as unknown)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ;(window as any).mixpanel = mp as any
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ;(mp as any).init(token, {
+          api_host: MIXPANEL_API_HOST,
+          autocapture: true,
+          track_pageview: true,
+          record_sessions_percent: 100,
+          recorder_src: MIXPANEL_RECORDER_PATH,
+        })
+
+        window.__mixpanelReady = true
+        flushMixpanelQueue()
+      } catch (error) {
+        console.error("Failed to load mixpanel-browser", error)
       }
+    })()
 
-      const token = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN
-      if (!token) {
-        console.error("NEXT_PUBLIC_MIXPANEL_TOKEN not found")
-        return
-      }
-
-      window.mixpanel.init(token, {
-        api_host: MIXPANEL_API_HOST,
-        autocapture: true,
-        track_pageview: true,
-        record_sessions_percent: 100,
-        recorder_src: MIXPANEL_RECORDER_PATH
-      })
-
-      window.__mixpanelReady = true
-      flushMixpanelQueue()
-    }
-
-    mixpanelScript.onerror = (error) => {
-      console.error("Unable to load Mixpanel snippet", error)
-    }
-
-    document.head.appendChild(mixpanelScript)
-
-    return () => {
-      document.head.removeChild(mixpanelScript)
-    }
+    return () => {}
   }, [])
 
   return <>{children}</>
