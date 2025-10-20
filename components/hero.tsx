@@ -22,11 +22,11 @@ export default function Hero() {
           <div className="space-y-8">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight sm:text-balance text-pretty">
               <span className="inline-block rounded-md px-3 py-0" style={{ backgroundColor: "var(--hero-badge-bg)" }}>
-                Launch
+                Publish
               </span>{' '}
-              your Godot{' '}
+                your Godot{' '}
               <br className="hidden sm:block" />
-              project just in{' '}
+                project with just{' '}
               <span className="inline-block rounded-md px-3 py-0" style={{ backgroundColor: "var(--hero-badge-bg)" }}>
                 One Click
               </span>
