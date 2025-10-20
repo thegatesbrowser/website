@@ -46,6 +46,9 @@ export function MixpanelProvider({ children }: MixpanelProviderProps) {
     initializedRef.current = true
 
     window.__mixpanelReady = false
+    // Ensure stub exists before loading the snippet to avoid "__SV" undefined errors
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(window as any).mixpanel = (window as any).mixpanel || []
     window.MIXPANEL_CUSTOM_LIB_URL = MIXPANEL_LIB_PATH
     window.__mp_recorder_src = MIXPANEL_RECORDER_PATH
 
