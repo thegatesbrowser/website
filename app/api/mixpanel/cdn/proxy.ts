@@ -32,7 +32,7 @@ export async function proxyMixpanelAsset(path: string) {
       headers,
     })
   } catch (error) {
-    reportErrorToAnalytics(normalizedPath, error)
+    console.error("Mixpanel CDN proxy error", { path: normalizedPath, error })
     return NextResponse.json({ error: "Mixpanel asset unavailable" }, { status: 502 })
   }
 }
