@@ -19,6 +19,7 @@ export default function Preview() {
               width={864}
               height={486}
               className="w-full h-auto"
+              unoptimized
               priority
             />
           </div>

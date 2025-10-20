@@ -61,6 +61,7 @@ export default function Workflow() {
                 height={1080}
                 className="w-full h-full object-cover"
                 sizes="(min-width: 768px) 50vw, 100vw"
+                unoptimized
               />
               <button
                 type="button"
@@ -106,6 +107,7 @@ export default function Workflow() {
                 height={1080}
                 className="w-full h-full object-cover"
                 sizes="(min-width: 768px) 50vw, 100vw"
+                unoptimized
               />
               <button
                 type="button"
