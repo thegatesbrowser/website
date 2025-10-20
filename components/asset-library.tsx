@@ -36,7 +36,7 @@ export default function AssetLibrary() {
               <span className="text-foreground/50">•</span>
               <span>Open Source</span>
               <span className="text-foreground/50">•</span>
-              <span>Community Supported</span>
+              <span>Community Driven</span>
             </p>
           </div>
         </div>
