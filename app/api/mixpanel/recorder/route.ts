@@ -55,12 +55,12 @@ export async function POST(request: NextRequest) {
     try {
       upstreamResponse = await fetch(upstreamUrl.toString(), fetchOptions)
     } catch (err) {
-      const anyErr = err as any
-      const cause = (anyErr && (anyErr.cause || anyErr)) as any
+      const error = err as Error & { cause?: { code?: string } }
+      const cause = error.cause || error
       if (
         REGION === "EU" &&
         cause &&
-        (cause.code === "ENOTFOUND" || cause.code === "EAI_AGAIN")
+        ("code" in cause && (cause.code === "ENOTFOUND" || cause.code === "EAI_AGAIN"))
       ) {
         const fallbackUrl = new URL("https://api-js.mixpanel.com/record/")
         fallbackUrl.search = upstreamUrl.search
