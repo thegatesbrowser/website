@@ -1,11 +1,14 @@
-'use client'
+"use client"
 
+import Image from "next/image"
 import { useEffect, useState } from "react"
 import { ArrowRight } from "lucide-react"
 
 type ActiveImage = {
   src: string
   alt: string
+  width: number
+  height: number
 }
 
 export default function Workflow() {
@@ -51,10 +54,13 @@ export default function Workflow() {
           {/* Step 1: Editor */}
           <div className="space-y-4">
             <div className="relative bg-card border border-border rounded-xl overflow-hidden flex items-center justify-center aspect-video">
-              <img
+              <Image
                 src="/export-plugin/assets/workflow-step1.png"
                 alt="Godot Editor with TheGates Exporter"
+                width={1920}
+                height={1080}
                 className="w-full h-full object-cover"
+                sizes="(min-width: 768px) 50vw, 100vw"
               />
               <button
                 type="button"
@@ -62,6 +68,8 @@ export default function Workflow() {
                   previewImage({
                     src: "/export-plugin/assets/workflow-step1.png",
                     alt: "Godot Editor with TheGates Exporter",
+                    width: 1920,
+                    height: 1080,
                   })
                 }
                 className="absolute inset-0 z-10 flex items-center justify-center cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
@@ -91,10 +99,13 @@ export default function Workflow() {
           {/* Step 2: Game */}
           <div className="space-y-4">
             <div className="relative bg-card border border-border rounded-xl overflow-hidden flex items-center justify-center aspect-video">
-              <img
+              <Image
                 src="/export-plugin/assets/workflow-step2.png"
                 alt="TheGates Game World"
+                width={1920}
+                height={1080}
                 className="w-full h-full object-cover"
+                sizes="(min-width: 768px) 50vw, 100vw"
               />
               <button
                 type="button"
@@ -102,6 +113,8 @@ export default function Workflow() {
                   previewImage({
                     src: "/export-plugin/assets/workflow-step2.png",
                     alt: "TheGates Game World",
+                    width: 1920,
+                    height: 1080,
                   })
                 }
                 className="absolute inset-0 z-10 flex items-center justify-center cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
@@ -130,10 +143,13 @@ export default function Workflow() {
             className="relative w-full max-w-[min(90vw,1400px)]"
             onClick={(event) => event.stopPropagation()}
           >
-            <img
+            <Image
               src={activeImage.src}
               alt={activeImage.alt}
+              width={activeImage.width}
+              height={activeImage.height}
               className="w-full h-auto max-h-[95vh] rounded-xl border border-border bg-card"
+              sizes="90vw"
             />
           </div>
         </div>

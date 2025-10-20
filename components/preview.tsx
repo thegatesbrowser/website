@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 export default function Preview() {
   return (
     <section className="py-20 sm:py-32 bg-background">
@@ -11,10 +13,13 @@ export default function Preview() {
 
         <div className="flex justify-center">
           <div className="relative rounded-xl border border-border overflow-hidden bg-card max-w-md">
-            <img
+            <Image
               src="/export-plugin/assets/preview-plugin.png"
               alt="TheGates Exporter Plugin Interface"
+              width={864}
+              height={486}
               className="w-full h-auto"
+              priority
             />
           </div>
         </div>
