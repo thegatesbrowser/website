@@ -57,6 +57,7 @@ export async function POST(request: NextRequest) {
     } catch (err) {
       const anyErr = err as any
       const cause = (anyErr && (anyErr.cause || anyErr)) as any
+      // DNS/network fallback: if EU host cannot resolve, retry against US host
       if (
         REGION === "EU" &&
         cause &&

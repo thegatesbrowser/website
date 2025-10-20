@@ -27,6 +27,7 @@ const MIXPANEL_API_HOST = withBasePath("/api/mixpanel")
 declare global {
   interface Window {
     MIXPANEL_CUSTOM_LIB_URL?: string
+    __mp_recorder_src?: string
   }
 }
 
@@ -57,13 +58,18 @@ export function MixpanelProvider({ children }: MixpanelProviderProps) {
         return
       }
 
-      window.mixpanel.init("proxy", {
+      const token = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN
+      if (!token) {
+        console.error("NEXT_PUBLIC_MIXPANEL_TOKEN not found")
+        return
+      }
+
+      window.mixpanel.init(token, {
         api_host: MIXPANEL_API_HOST,
         autocapture: true,
         track_pageview: true,
         record_sessions_percent: 100,
-        record_heatmap_data: true,
-        debug: true
+        recorder_src: MIXPANEL_RECORDER_PATH
       })
 
       window.__mixpanelReady = true
