@@ -10,7 +10,7 @@ export default function TermsOfService() {
         </div>
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="space-y-4 text-center">
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary/80">TheGates Export Plugin</p>
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary/80">TheGates Export Plugin & Hosting</p>
             <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Terms of Service</h1>
             <p className="text-sm text-foreground/60">Last updated: October 2025</p>
           </div>
@@ -20,18 +20,18 @@ export default function TermsOfService() {
       <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-4xl space-y-12 px-4 sm:px-6 lg:px-8">
           <p className="text-base leading-relaxed text-foreground/70">
-            Welcome to <span className="font-semibold text-foreground">TheGates.io</span>, a hosting platform for Godot
-            projects that allows developers to instantly publish and share their creations. By using our services, you
-            agree to the following terms.
+            Thank you for using <span className="font-semibold text-foreground">TheGates</span>! These Terms of Service <span className="font-semibold text-foreground">apply only
+            to TheGates Export Plugin and its associated hosting service (“TheGates Hosting”)</span>.
+            Other parts of TheGates ecosystem, such as TheGates App, may be governed by separate or additional terms.
           </p>
 
           <div className="space-y-10">
             <article className="space-y-4">
-              <h2 className="text-xl font-semibold text-foreground">1. About TheGates.io</h2>
+              <h2 className="text-xl font-semibold text-foreground">1. About TheGates Export Plugin & Hosting</h2>
               <p className="text-base leading-relaxed text-foreground/70">
-                TheGates.io (“we”, “our”, or “us”) provides tools and hosting services that allow users to publish,
-                update, and share projects created with the Godot Engine. When you use our service (including the Godot
-                Export Plugin), you agree to these Terms.
+                TheGates (“we”, “our”, or “us”) provides tools and hosting services that allow users to publish,
+                update, and share projects created with the Godot Engine. When you use our services—including the export
+                plugin or hosting platform—you agree to these Terms.
               </p>
             </article>
 
@@ -40,9 +40,9 @@ export default function TermsOfService() {
               <ul className="list-disc space-y-3 pl-6 text-base leading-relaxed text-foreground/70">
                 <li>You retain full ownership and rights to your projects, assets, and intellectual property.</li>
                 <li>
-                  By uploading or publishing your project, you grant TheGates.io a non-exclusive, revocable license to
-                  host, display, and distribute your project only as needed to provide our service (for example, to serve
-                  files to users who visit your project).
+                  By uploading or publishing your project, you grant us a non-exclusive, revocable license to host, display,
+                  and distribute your project only as needed to provide our service (for example, to serve files to users who
+                  visit your project).
                 </li>
                 <li>You can delete your project at any time, which will end this license.</li>
                 <li>We do not claim ownership or control over your content.</li>
@@ -67,7 +67,7 @@ export default function TermsOfService() {
             <article className="space-y-4">
               <h2 className="text-xl font-semibold text-foreground">4. Hosting and Data Usage</h2>
               <ul className="list-disc space-y-3 pl-6 text-base leading-relaxed text-foreground/70">
-                <li>TheGates.io acts purely as a hosting provider. We do not edit, modify, or claim your content.</li>
+                <li>Our hosting platform acts purely as a hosting provider. We do not edit, modify, or claim your content.</li>
                 <li>You may remove your content at any time via your account or plugin.</li>
                 <li>We reserve the right to remove content that violates these Terms or applicable law.</li>
                 <li>We may temporarily store logs and analytics to maintain and improve the platform.</li>
@@ -76,7 +76,7 @@ export default function TermsOfService() {
 
             <article className="space-y-4">
               <h2 className="text-xl font-semibold text-foreground">5. Acceptable Use</h2>
-              <p className="text-base leading-relaxed text-foreground/70">You agree not to use TheGates.io to:</p>
+              <p className="text-base leading-relaxed text-foreground/70">You agree not to use the hosting platform to:</p>
               <ul className="list-disc space-y-3 pl-6 text-base leading-relaxed text-foreground/70">
                 <li>Upload or host malware or security exploits.</li>
                 <li>Abuse bandwidth or system resources.</li>
@@ -88,8 +88,8 @@ export default function TermsOfService() {
             <article className="space-y-4">
               <h2 className="text-xl font-semibold text-foreground">6. Service Availability</h2>
               <p className="text-base leading-relaxed text-foreground/70">
-                We do our best to keep TheGates.io online, but the service is provided “as is” and “as available.” We do
-                not guarantee uptime, speed, or that all data will be preserved.
+                We do our best to keep the hosting platform online, but the service is provided “as is” and “as available.”
+                We do not guarantee uptime, speed, or that all data will be preserved.
               </p>
             </article>
 
@@ -98,7 +98,7 @@ export default function TermsOfService() {
               <p className="text-base leading-relaxed text-foreground/70">To the fullest extent permitted by law:</p>
               <ul className="list-disc space-y-3 pl-6 text-base leading-relaxed text-foreground/70">
                 <li>
-                  TheGates.io and its developers are not liable for any damages, loss of data, or loss of revenue
+                  TheGates service and its developers are not liable for any damages, loss of data, or loss of revenue
                   resulting from your use (or inability to use) the service.
                 </li>
                 <li>Your use of the service is entirely at your own risk.</li>
@@ -124,7 +124,7 @@ export default function TermsOfService() {
               <h2 className="text-xl font-semibold text-foreground">9. Updates to These Terms</h2>
               <p className="text-base leading-relaxed text-foreground/70">
                 We may update these Terms periodically. If we make significant changes, we will notify you via our site or
-                plugin. Continued use of TheGates.io after updates means you accept the revised Terms.
+                plugin. Continued use of the service after updates means you accept the revised Terms.
               </p>
             </article>
 
