@@ -87,7 +87,7 @@ export function MixpanelProvider({ children }: MixpanelProviderProps) {
           api_host: apiHost,
           autocapture: true,
           track_pageview: true,
-          record_sessions_percent: 100,
+          record_sessions_percent: 0,
         })
 
         const mixpanelInstance = window.mixpanel
