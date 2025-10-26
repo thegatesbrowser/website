@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import type mixpanelBrowser from "mixpanel-browser"
 
 import { flushMixpanelQueue } from "@/lib/client/mixpanel-shared"
 
@@ -19,8 +20,38 @@ const withBasePath = (path: string) => {
   return `${basePath}${cleanPath}` || cleanPath
 }
 
-const MIXPANEL_RECORDER_PATH = withBasePath("/api/mixpanel/recorder")
-const MIXPANEL_API_HOST = withBasePath("/api/mixpanel")
+const MIXPANEL_API_BASE_PATH = withBasePath("/api/mixpanel")
+
+const getDefaultMixpanelApiHost = () => {
+  const region = (process.env.NEXT_PUBLIC_MIXPANEL_REGION || "US").toUpperCase()
+  return region === "EU" ? "https://api-eu.mixpanel.com" : "https://api-js.mixpanel.com"
+}
+
+const getDefaultRecorderSrc = () => "https://cdn.mxpnl.com/libs/mixpanel-recorder.min.js"
+
+const getMixpanelProxyConfig = () => {
+  if (typeof window === "undefined") {
+    return {
+      apiHost: MIXPANEL_API_BASE_PATH,
+      recorderSrc: `${MIXPANEL_API_BASE_PATH}/recorder`,
+    }
+  }
+
+  const hostname = window.location.hostname
+  const isLocalhost = hostname === "localhost" || hostname === "127.0.0.1" || hostname === "0.0.0.0"
+
+  if (isLocalhost) {
+    return {
+      apiHost: getDefaultMixpanelApiHost(),
+      recorderSrc: getDefaultRecorderSrc(),
+    }
+  }
+
+  return {
+    apiHost: MIXPANEL_API_BASE_PATH,
+    recorderSrc: `${MIXPANEL_API_BASE_PATH}/recorder`,
+  }
+}
 
 type MixpanelProviderProps = {
   children: React.ReactNode
@@ -47,19 +78,24 @@ export function MixpanelProvider({ children }: MixpanelProviderProps) {
     ;(async () => {
       try {
         const mod = await import("mixpanel-browser")
-        // Some bundlers expose default, others the module itself; handle both
-        const mp = (mod as unknown as { default?: unknown }).default ?? (mod as unknown)
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ;(window as any).mixpanel = mp as any
+        const mp: typeof mixpanelBrowser = ("default" in mod ? mod.default : mod) as typeof mixpanelBrowser
+        window.mixpanel = mp as Window["mixpanel"]
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ;(mp as any).init(token, {
-          api_host: MIXPANEL_API_HOST,
+        const { apiHost, recorderSrc } = getMixpanelProxyConfig()
+
+        mp.init(token, {
+          api_host: apiHost,
           autocapture: true,
           track_pageview: true,
           record_sessions_percent: 100,
-          recorder_src: MIXPANEL_RECORDER_PATH,
         })
+
+        const mixpanelInstance = window.mixpanel
+        if (mixpanelInstance?.set_config) {
+          mixpanelInstance.set_config({
+            recorder_src: recorderSrc,
+          })
+        }
 
         window.__mixpanelReady = true
         flushMixpanelQueue()

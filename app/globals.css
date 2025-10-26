@@ -75,8 +75,8 @@
 }
 
 @theme inline {
-  --font-sans: "Geist", "Geist Fallback";
-  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -121,5 +121,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-geist-sans);
+  }
+  code,
+  pre {
+    font-family: var(--font-geist-mono);
   }
 }
